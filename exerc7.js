@@ -1,11 +1,9 @@
 const http = require('http');
 
 const server = http.createServer((req, res) => {
-  const d_t = new Date();
-
-  if (req.url === '/usuario') {
-    res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
-    res.end(JSON.stringify({ "nome": "Henrique", "idade": "20" }));
+  if (req.url === '/ifc') {
+    res.writeHead(302, { "Location": "https://www.videira.ifc.edu.br" });
+    res.end();
   } else {
     res.writeHead(404, { 'Content-Type': 'text/plain; charset=utf-8' });
     res.end('Página não encontrada');
@@ -15,3 +13,4 @@ const server = http.createServer((req, res) => {
 server.listen(3000, () => {
   console.log('Servidor iniciado na porta 3000')
 });
+

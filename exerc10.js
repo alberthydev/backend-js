@@ -1,11 +1,11 @@
 const http = require('http');
 
 const server = http.createServer((req, res) => {
-  const d_t = new Date();
+  if (req.url === '/metodo') {
+    const method = req.method;
 
-  if (req.url === '/usuario') {
-    res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
-    res.end(JSON.stringify({ "nome": "Henrique", "idade": "20" }));
+    res.writeHead(200, { "content-type": "text/plain; charset=utf-8" });
+    res.end(`O método HTTP usado aqui é o ${method}`);
   } else {
     res.writeHead(404, { 'Content-Type': 'text/plain; charset=utf-8' });
     res.end('Página não encontrada');
