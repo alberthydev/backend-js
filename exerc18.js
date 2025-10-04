@@ -19,12 +19,15 @@ const server = http.createServer(async (req, res) => {
     } else if (req.url === '/produtos' && req.method === 'POST') {
       const body = await lerCorpo(req);
       const novoProduto = JSON.parse(body);
+      const novoID = produtos.length > 0 ? Math.max(...produtos.map(p => p.id)) + 1 : 1;
 
       if (!novoProduto.nome || !novoProduto.preco) {
         res.writeHead(400, { "content-type": "application/json; charset=utf-8" });
         res.end(JSON.stringify(({ sucesso: false, msg: "Nome e Preço são obrigatórios" })));
         return;
       }
+
+      novoProduto.id = novoID;
 
       produtos.push(novoProduto);
       res.writeHead(201, { "content-type": "application/json; charset=utf-8" });
